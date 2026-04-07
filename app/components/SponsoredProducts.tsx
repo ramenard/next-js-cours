@@ -1,5 +1,6 @@
 import { getSponsoredProducts } from "@/domains/sponsored/sponsoredProduct";
 import { SponsoredProductCard } from "@/app/components/SponsoredProductCard";
+import { RevalidateSponsoredButton } from "@/app/components/RevalidateSponsoredButton";
 
 // Composant async → peut être wrappé dans <Suspense>
 export async function SponsoredProducts() {
@@ -16,6 +17,8 @@ export async function SponsoredProducts() {
         <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
           Partenaires
         </span>
+        {/* Bouton qui déclenche revalidateTag("sponsored") via Server Action */}
+        <RevalidateSponsoredButton />
       </div>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {products.map((product) => (

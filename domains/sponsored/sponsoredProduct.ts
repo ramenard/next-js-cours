@@ -44,11 +44,17 @@ const SPONSORED_QUERY = `
 `;
 
 export async function getSponsoredProducts(): Promise<SponsoredProduct[]> {
+  const start = performance.now();
+
   const res = await fetch(MOCK_SHOP_ENDPOINT, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ query: SPONSORED_QUERY }),
-    next: { revalidate: 3600 }, // Cache 1h côté Next.js
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({query: SPONSORED_QUERY}),
+    // "force-cache"  → toujours servi depuis le cache (jamais de réseau)
+    // "no-store"     → jamais mis en cache (toujours réseau)
+    // next.revalidate → ISR : cache pendant N secondes, puis re-fetch en fond
+    // next.tags      → permet revalidateTag("sponsored") pour invalider manuellement
+    next: {revalidate: 3600, tags: ["sponsored"]},
   });
 
   if (!res.ok) throw new Error("Erreur lors du fetch mock.shop");
@@ -56,7 +62,7 @@ export async function getSponsoredProducts(): Promise<SponsoredProduct[]> {
   const json = await res.json();
   const products = json.data?.collection?.products?.edges ?? [];
 
-  return products.map(({ node }: any) => ({
+  return products.map(({node}: any) => ({
     id: node.id,
     title: node.title,
     handle: node.handle,
@@ -98,12 +104,12 @@ export async function getSponsoredProductByHandle(
 ): Promise<SponsoredProduct | null> {
   const res = await fetch(MOCK_SHOP_ENDPOINT, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {"Content-Type": "application/json"},
     body: JSON.stringify({
       query: SPONSORED_BY_HANDLE_QUERY,
-      variables: { handle },
+      variables: {handle},
     }),
-    next: { revalidate: 3600 },
+    next: {revalidate: 3600},
   });
 
   if (!res.ok) throw new Error("Erreur lors du fetch mock.shop");
