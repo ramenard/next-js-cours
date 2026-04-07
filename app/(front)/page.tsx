@@ -1,14 +1,35 @@
-import products from '@/domains/catalog/data/products.json'
-import ProductCard from "@/components/ProductCard";
+import {ProductCard} from "../components/ProductCard";
+import {getProducts} from "@/domains/catalog/repository/productRepository";
+import {Suspense} from "react";
+import {Product} from "@/domains/catalog/entity/product";
 
 export default async function Home() {
-  return (
-    <div className="bg-black text-white flex items-center justify-center">
-      <div className="grid grid-cols-3 gap-4 py-20 px-10">
-        {products.map((product) => (
-          <ProductCard product={product} key={product.id} />
-        ))}
-      </div>
-    </div>
+  let products: Product[] = []
+  setTimeout(async () => {
+      // eslint-disable-next-line react-hooks/immutability
+      products = await getProducts()
+    }, 100
   )
+  ;
+  return (
+    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <section className="mb-14 text-center">
+        <h1 className="text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-5xl">
+          Nos produits
+        </h1>
+        <p className="mx-auto mt-4 max-w-2xl text-lg text-zinc-600 dark:text-zinc-400">
+          Découvrez une sélection soignée pour le bureau, l&apos;audio et le quotidien.
+        </p>
+      </section>
+
+      <section className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <Suspense fallback={(<div className="text-white"><span>pouet</span></div>)}>
+          {products.map((product) => (
+            <ProductCard product={product} key={product.id}/>
+          ))}
+        </Suspense>
+
+      </section>
+    </div>
+  );
 }
