@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { ProductDetail } from "@/app/components/ProductDetail";
 import { SimilarProducts } from "@/app/components/SimilarProducts";
+import { SponsoredProducts } from "@/app/components/SponsoredProducts";
 import { getProducts } from "@/domains/catalog/repository/productRepository";
 
 export const dynamic = "force-dynamic";
@@ -43,6 +44,23 @@ function SimilarProductsSkeleton() {
   );
 }
 
+function SponsoredSkeleton() {
+  return (
+    <div className="mt-16 animate-pulse">
+      <div className="mb-6 h-7 w-56 rounded bg-amber-100 dark:bg-amber-900/30" />
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {Array.from({ length: 4 }).map((_, i) => (
+          <div key={i} className="space-y-3">
+            <div className="aspect-square rounded-2xl bg-amber-100 dark:bg-amber-900/20" />
+            <div className="h-4 w-3/4 rounded bg-zinc-200 dark:bg-zinc-700" />
+            <div className="h-4 w-1/2 rounded bg-zinc-200 dark:bg-zinc-700" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default async function ProductPage(props: PageProps<"/produit/[slug]">) {
   const { slug } = await props.params;
 
@@ -64,6 +82,11 @@ export default async function ProductPage(props: PageProps<"/produit/[slug]">) {
       */}
       <Suspense fallback={<SimilarProductsSkeleton />}>
         <SimilarProducts slug={slug} />
+      </Suspense>
+
+      {/* Suspense #3 : produits sponsorisés (API externe mock.shop) */}
+      <Suspense fallback={<SponsoredSkeleton />}>
+        <SponsoredProducts />
       </Suspense>
     </div>
   );
