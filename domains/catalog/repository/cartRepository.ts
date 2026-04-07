@@ -1,10 +1,10 @@
-import {Cart} from "@/generated/prisma";
-import {addItemToCartInDB, getCartById} from "@/domains/catalog/data/cartData";
+import { getCartWithItems, getOrCreateCart, addProductToCart, type CartWithItems } from "@/domains/catalog/data/cartData";
 
-export async function getCart(cartId: string): Promise<Cart> {
-  return getCartById(cartId);
+export async function getCart(cartId: string): Promise<CartWithItems | null> {
+  return getCartWithItems(cartId);
 }
 
-export async function addItemToCart(itemSlug: string, cardId?: string): Promise<Cart> {
-  return addItemToCartInDB(itemSlug);
+export async function addItemToCart(productSlug: string, cartId?: string): Promise<CartWithItems> {
+  const cart = await getOrCreateCart(cartId);
+  return addProductToCart(cart.id, productSlug);
 }

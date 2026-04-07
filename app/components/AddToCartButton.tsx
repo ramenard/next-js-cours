@@ -1,29 +1,25 @@
 "use client";
 
 import { useState } from "react";
-import { useCart } from "@/app/context/CartContext";
+import { useRouter } from "next/navigation";
 
 type Props = {
   disabled: boolean;
   slug: string;
-  name: string;
-  price: number;
-  currency: string;
 };
 
-export function AddToCartButton({
-  disabled,
-  slug,
-  name,
-  price,
-  currency,
-}: Props) {
-  const { addToCart } = useCart();
+export function AddToCartButton({ disabled, slug }: Props) {
+  const router = useRouter();
   const [added, setAdded] = useState(false);
 
-  const handleClick = () => {
-    addToCart({ slug, name, price, currency });
+  const handleClick = async () => {
+    await fetch("/api/cart", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ slug }),
+    });
     setAdded(true);
+    router.refresh(); // re-render les RSC (CartSummary lit le panier en DB)
     setTimeout(() => setAdded(false), 2000);
   };
 

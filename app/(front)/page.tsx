@@ -4,13 +4,7 @@ import {Suspense} from "react";
 import {Product} from "@/domains/catalog/entity/product";
 
 export default async function Home() {
-  let products: Product[] = []
-  setTimeout(async () => {
-      // eslint-disable-next-line react-hooks/immutability
-      products = await getProducts()
-    }, 100
-  )
-  ;
+  const products: Product[] = await getProducts();
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
       <section className="mb-14 text-center">

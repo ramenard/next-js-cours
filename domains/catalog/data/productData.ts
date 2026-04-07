@@ -59,3 +59,13 @@ export async function findProductBySlug(slug: string): Promise<Product | null> {
   if (!row) return null;
   return mapRowToProduct(row);
 }
+
+export async function findSimilarProducts(slug: string): Promise<Product[]> {
+  const rows = await prisma.similarProduct.findMany({
+    where: { product: { slug } },
+    include: { similarProduct: true },
+    orderBy: { score: "desc" },
+    take: 4,
+  });
+  return rows.map((r) => mapRowToProduct(r.similarProduct));
+}
