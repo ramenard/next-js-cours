@@ -3,8 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getSponsoredProductByHandle } from "@/domains/sponsored/sponsoredProduct";
 
-export const dynamic = "force-dynamic";
-
 function formatPrice(amount: string, currency: string): string {
   return new Intl.NumberFormat("fr-FR", {
     style: "currency",
