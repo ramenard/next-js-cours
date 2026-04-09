@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { CartProviderWrapper } from "./(front)/CartProviderWrapper";
-import { CartSummary } from "./components/CartSummary";
-import { Footer } from "./components/Footer";
-import { Nav } from "./components/Nav";
+import {Nav} from "@/components/Nav";
+import {Footer} from "@/components/Footer";
+import {CartSummary} from "@/components/CartSummary";
 
 export default function NotFound() {
   return (
