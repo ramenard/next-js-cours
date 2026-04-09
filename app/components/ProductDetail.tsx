@@ -8,7 +8,6 @@ import {
   isInStock,
 } from "@/domains/catalog/entity/product";
 import { getProductBySlug } from "@/domains/catalog/repository/productRepository";
-
 type Props = { slug: string };
 
 // Composant async : il fetch ses propres données → peut être streamé via Suspense

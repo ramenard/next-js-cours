@@ -2,7 +2,22 @@ import { Suspense } from "react";
 import { ProductDetail } from "@/app/components/ProductDetail";
 import { SimilarProducts } from "@/app/components/SimilarProducts";
 import { SponsoredProducts } from "@/app/components/SponsoredProducts";
-import { getProducts } from "@/domains/catalog/repository/productRepository";
+import { getProducts, getProductBySlug } from "@/domains/catalog/repository/productRepository";
+import { Metadata } from "next";
+
+export async function generateMetadata(props: PageProps<"/produit/[slug]">): Promise<Metadata> {
+  const { slug } = await props.params;
+  const product = await getProductBySlug(slug);
+
+  if (!product) {
+    return {};
+  }
+
+  return {
+    title: product.name,
+    description: product.description,
+  };
+}
 
 // PPR activé globalement via cacheComponents: true dans next.config.ts
 // Shell statique généré au build, <Suspense> dynamiques streamés à la requête.

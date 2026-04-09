@@ -19,6 +19,9 @@ export default function DemoPage() {
         loading.tsx et error.tsx du segment (front).
       </p>
 
+      <p>ENV: { process.env.PUBLIC_SITE_NAME }</p>
+      <p>ENV FRONT: { process.env.NEXT_PUBLIC_SITE_NAME }</p>
+
       <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:gap-8">
         <section className="rounded-lg border border-zinc-200 p-6 dark:border-zinc-700">
           <h2 className="font-semibold text-zinc-900 dark:text-zinc-100">
