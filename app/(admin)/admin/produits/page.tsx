@@ -60,7 +60,13 @@ export default async function AdminProduits() {
                       {formatStockLabel(product)}
                     </span>
                   </td>
-                  <td className="px-4 py-3">
+                  <td className="px-4 py-3 flex items-center gap-4">
+                    <Link
+                      href={`/admin/produits/${product.id}/edit`}
+                      className="text-indigo-400 hover:text-indigo-300"
+                    >
+                      Modifier
+                    </Link>
                     <Link
                       href={`/produit/${product.slug}`}
                       target="_blank"

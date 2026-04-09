@@ -7,6 +7,13 @@ import {
   formatSpecLabel,
   formatSpecValue,
 } from "@/domains/catalog/entity/product";
+import {useReportWebVitals} from "next/web-vitals";
+
+export function WebVitals() {
+  useReportWebVitals((metric) => {
+    console.log(metric)
+  })
+}
 
 const TAB_DESCRIPTION = "description";
 const TAB_SPECS = "specs";
@@ -27,6 +34,8 @@ export function ProductTabs({
 }) {
   const searchParams = useSearchParams();
   const tab = parseTab(searchParams.get("tab"));
+
+  WebVitals()
 
   return (
     <>

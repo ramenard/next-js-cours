@@ -60,6 +60,12 @@ export async function findProductBySlug(slug: string): Promise<Product | null> {
   return mapRowToProduct(row);
 }
 
+export async function findProductById(id: string): Promise<Product | null> {
+  const row = await prisma.product.findUnique({ where: { id } });
+  if (!row) return null;
+  return mapRowToProduct(row);
+}
+
 export async function findSimilarProducts(slug: string): Promise<Product[]> {
   const rows = await prisma.similarProduct.findMany({
     where: { product: { slug } },
