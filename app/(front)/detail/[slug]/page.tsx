@@ -1,5 +1,5 @@
 import products from '@/domains/catalog/data/products.json'
-import {Product} from "@/components/ProductCard";
+import type { Product } from "@/domains/catalog/entity/product";
 import ImageDetail from "@/components/ImageDetail";
 
 export function getProductsBySlug(slug: string): Product | undefined {

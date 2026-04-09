@@ -1,6 +1,6 @@
 import {Suspense} from "react";
-import {ProductCard} from "../components/ProductCard";
-import {SponsoredProducts} from "@/app/components/SponsoredProducts";
+import {ProductCard} from "@/components/ProductCard";
+import {SponsoredProducts} from "@/components/SponsoredProducts";
 import {getProducts} from "@/domains/catalog/repository/productRepository";
 import {Product} from "@/domains/catalog/entity/product";
 

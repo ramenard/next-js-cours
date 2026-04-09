@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { AddToCartButton } from "@/app/components/AddToCartButton";
-import { ProductTabs } from "@/app/components/ProductTabs";
+import { AddToCartButton } from "@/components/AddToCartButton";
+import { ProductTabs } from "@/components/ProductTabs";
 import {
   formatPrice,
   formatStockLabel,

@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image";
-import {Product} from "@/components/ProductCard";
+import type { Product } from "@/domains/catalog/entity/product";
 import {useState} from "react";
 
 export default function ImageDetail({product}: { product: Product }) {

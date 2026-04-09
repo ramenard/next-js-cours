@@ -1,6 +1,6 @@
 import { connection } from "next/server";
 import { getSimilarProducts } from "@/domains/catalog/repository/productRepository";
-import { ProductCard } from "@/app/components/ProductCard";
+import { ProductCard } from "@/components/ProductCard";
 
 type Props = { slug: string };
 

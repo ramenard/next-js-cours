@@ -1,6 +1,6 @@
 import { getSponsoredProducts } from "@/domains/sponsored/sponsoredProduct";
-import { SponsoredProductCard } from "@/app/components/SponsoredProductCard";
-import { RevalidateSponsoredButton } from "@/app/components/RevalidateSponsoredButton";
+import { SponsoredProductCard } from "@/components/SponsoredProductCard";
+import { RevalidateSponsoredButton } from "@/components/RevalidateSponsoredButton";
 
 // Composant async → peut être wrappé dans <Suspense>
 export async function SponsoredProducts() {

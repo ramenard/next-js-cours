@@ -1,7 +1,7 @@
 import { Suspense } from "react";
-import { ProductDetail } from "@/app/components/ProductDetail";
-import { SimilarProducts } from "@/app/components/SimilarProducts";
-import { SponsoredProducts } from "@/app/components/SponsoredProducts";
+import { ProductDetail } from "@/components/ProductDetail";
+import { SimilarProducts } from "@/components/SimilarProducts";
+import { SponsoredProducts } from "@/components/SponsoredProducts";
 import { getProducts, getProductBySlug } from "@/domains/catalog/repository/productRepository";
 import { Metadata } from "next";
 
